@@ -52,24 +52,42 @@ What's the time complexity?
 
 function Queue(capacity) {
   // implement me...
+  this.capacity = capacity;
+  this.storage = {};
+  this.head = 0;
+  this.tail = 0;
 }
 
 Queue.prototype.enqueue = function(value) {
   // implement me...
+  if(this.tail < this.capacity) {
+    this.tail++;
+    this.storage[this.tail] = value;
+    return this;
+  }
+  throw new Error('Cannot add item. The queue has reached max capacity!');
 };
 // Time complexity:
 
 Queue.prototype.dequeue = function() {
   // implement me...
+  if(this.tail > this.head) {
+    delete this.storage[this.head+1];
+    this.tail--;
+    return this;
+  }
+  throw new Error('Cannot remove. No items in queue.');
 };
 // Time complexity:
 
 Queue.prototype.peek = function() {
   // implement me...
+  return this.storage[this.head+1];
 };
 
 Queue.prototype.count = function() {
   // implement me...
+  return this.tail - this.head;
 };
 // Time complexity:
 
